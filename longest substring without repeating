@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        string result;
+        result = s[0];
+        int maxnumber =1;
+        int number=1;
+        for(int i=1;i<s.size();i++){
+            if(result.find(s[i])>result.size()){
+                result = result+s[i];
+                number= number+1;
+                if(number>maxnumber){
+                    maxnumber = number;
+                }
+            }
+            else {
+                if (result.find(s[i])==result.size()-1){
+                    result=s[i];
+                    number=1;
+                }
+                else{
+                    result=result.substr(result.find(s[i])+1);
+                    result=result+s[i];
+                    number=result.size();
+                }
+            }
+        }
+        if (s==""){
+            maxnumber = 0;
+        }
+       return maxnumber; 
+    }
+};
