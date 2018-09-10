@@ -1,0 +1,44 @@
+/*寻找回文句利用了选取原始句子和反转句子中共有的子字符串来选取 利用二维数组来进行标记相同的字符点 如果相同依次累积得到最大长度 然后进行判断甄选出不是
+abc54cba这种句子 利用句子最开始和结束字符必须相同来筛选*/
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int length = s.size();
+        int arr[1000][1000]={0};
+        string temps = s;
+        int maxlen=1;
+        int maxend;
+        reverse(temps.begin(),temps.end());
+        if(s==""){
+            return "";
+        }
+        if(length==1){
+            return s;
+        }
+        for(int i=0;i<length;i++){
+            for(int j=0;j<length;j++){
+                if(s[i]==temps[j]){
+                    if(i==0 || j==0){
+                        arr[i][j]=1;
+                    }
+                    else{
+                        arr[i][j] = arr[i-1][j-1]+1;
+                    }
+                    
+                }
+                if(arr[i][j]>maxlen){
+                    if(temps[j]==temps[j+1-arr[i][j]]){
+                        maxlen=arr[i][j];
+                        maxend=i;
+                    }
+                }
+            }
+        }
+        string result;
+        result = s.substr(maxend+1-maxlen,maxlen);
+        if(result==""){
+            result=s[0];
+        }
+        return result;
+    }
+};
