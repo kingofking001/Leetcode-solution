@@ -1,0 +1,28 @@
+/*设置一个方向变量 在正方向为1 负方向为-1 这样控制值的插入*/
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        string *result = new string[numRows];
+        int row=0;
+        if(numRows==1){
+            return s;
+        }
+        for(int i =0;i<numRows;i++){
+            result[i]="";
+        }
+        int direction=-1;
+        for(int i=0;i<s.size();i++){
+            result[row] = result[row]+s[i];
+            if(row==0 || row==numRows-1){
+                direction=-direction;
+            }
+            row = row+direction;
+        }
+        string final;
+        final="";
+        for(int i=0;i<numRows;i++){
+            final =final+result[i];
+        }
+        return final;
+    }
+};
