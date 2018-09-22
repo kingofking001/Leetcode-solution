@@ -1,0 +1,18 @@
+/*转换成字符串 用reverse函数直接转换判断*/
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        string temp;
+        temp = to_string(x);
+        string reversetemp;
+        reversetemp = temp;
+        reverse(reversetemp.begin(),reversetemp.end());
+        if(reversetemp==temp) {
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+    }
+};
