@@ -1,0 +1,33 @@
+/* 先找到最短的单词 然后再对最短的单词的长度的字母依次比较寻找相同的值 出现不同就break*/
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.size()==0) return "";
+        if(strs.size()==1) return strs[0];
+        vector<int> length;
+        for(int i=0;i<strs.size();i++){
+            length.push_back(strs[i].length());
+        }
+        auto minlength = min_element(length.begin(),length.end());
+        string result;
+        result="";
+        for(int i=0;i<*minlength;i++){
+            int j=0;
+            while(j<strs.size()-1){
+                if(strs[j][i]==strs[j+1][i]){
+                    j = j+1;
+                }
+                else{
+                    break;
+                }
+            }
+            if(j==strs.size()-1) {
+                result=strs[0].substr(0,i+1);
+            }
+            else{
+                return result;
+            }
+        }
+        return result;
+    }
+};
